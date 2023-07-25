@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 #define MASK1111 0b11111111111111111111111111111111
 #define S21_NAN 0.0 / 0.0

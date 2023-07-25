@@ -1,4 +1,5 @@
 GCC=gcc -Wall -Werror -Wextra
+OS := $(shell uname -s)
 
 all: test gcov_report
 
@@ -8,8 +9,9 @@ convertors.a : convertors.c
 	ranlib convertors.a
 
 test: clean test_convertors.c convertors.a
-	# gcc  -Wall -Wextra -Werror -std=c11 -c test_convertors.c -o test_convertors.o
-	gcc test_convertors.c -lcheck  convertors.a -o test
+ifeq ($(OS),Linux)
+	$(GCC) -fprofile-arcs -ftest-coverage -o test convertors.c test_convertors.c -lcheck -lsubunit -lrt -lm -lpthread
+endif
 	./test
 
 rebuild: clean all
