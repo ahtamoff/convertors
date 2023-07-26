@@ -4,13 +4,16 @@ OS := $(shell uname -s)
 all: test gcov_report
 
 convertors.a : convertors.c
-	$(GCC) -c convertors.c 
-	ar rc  convertors.a convertors.o 
+	$(GCC) -c convertors.c another_func.c
+	ar rc  convertors.a convertors.o another_func.o
 	ranlib convertors.a
 
 test: clean test_convertors.c convertors.a
 ifeq ($(OS),Linux)
-	$(GCC) -fprofile-arcs -ftest-coverage -o test convertors.c test_convertors.c -lcheck -lsubunit -lrt -lm -lpthread
+	$(GCC) -fprofile-arcs -ftest-coverage -o test convertors.c another_func.c test_convertors.c -lcheck -lsubunit -lrt -lm -lpthread
+endif
+ifeq ($(OS), Darwin)
+	$(GCC) -fprofile-arcs -ftest-coverage -o test convertors.c another_func.c test_convertors.c -lcheck 
 endif
 	./test
 
