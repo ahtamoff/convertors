@@ -3,7 +3,11 @@
 
 int s21_from_int_to_decimal(int src, s21_decimal *dst) {
   int res = 0;
-  if (src == S21_INF || src == S21_NAN) res = 1;
+  if (src != S21_INF && src != S21_NAN){
+    dst->bits[0] = 0;
+    dst->bits[1] = 0;
+    dst->bits[2] = 0;
+    dst->bits[3] = 0;
   if (src < 0) {
     if (src == -2147483648) {
       src += 1;
@@ -12,6 +16,7 @@ int s21_from_int_to_decimal(int src, s21_decimal *dst) {
     src *= -1;
   }
   dst->bits[0] = src;
+  }else res = 1;  
   return res;
 }
 
