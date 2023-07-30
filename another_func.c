@@ -16,6 +16,16 @@ void set_sign(s21_decimal* val, int sign) {
   sign ? set_sign_minus(val) : set_sign_plus(val);
 }
 
+void s21_set_bit(s21_decimal *number, int bit, int value) {
+  unsigned int shift = 1;
+  if (bit >= 0 && bit < 128) {
+    if (value)
+      number->bits[bit / 32] = number->bits[bit / 32] | shift << (bit % 32);
+    else
+      number->bits[bit / 32] = number->bits[bit / 32] & ~(shift << (bit % 32));
+  }
+}
+
 void divide_by_10(s21_decimal* buf, int scale) {
   unsigned long long u_num;  
   int tmp_int = 0;
