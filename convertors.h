@@ -19,6 +19,7 @@ void set_sign_plus(s21_decimal* val);
 void set_sign(s21_decimal* val, int sign);
 void s21_set_bit(s21_decimal *number, int bit, int value);
 
+
 int s21_negate(s21_decimal value, s21_decimal *result);
 int s21_truncate(s21_decimal value, s21_decimal *result);
 int s21_floor(s21_decimal value, s21_decimal *result);

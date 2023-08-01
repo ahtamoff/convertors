@@ -26,6 +26,10 @@ void s21_set_bit(s21_decimal *number, int bit, int value) {
   }
 }
 
+
+
+
+
 void divide_by_10(s21_decimal* buf, int scale) {
   unsigned long long u_num;  
   int tmp_int = 0;
@@ -63,5 +67,4 @@ int s21_truncate(s21_decimal value, s21_decimal* result) {
   set_sign(result, sign);
   return 0;
 }
-
 
